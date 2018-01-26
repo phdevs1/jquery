@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Selectores test</title>
+	<style type="text/css">
+		table{
+			width: 210px;
+			border: 1px solid black;
+		}
+		.rojo{
+			color:red;
+			background-color: blue; 
+		}
+		#cuadro{
+			background-color:red;
+			width: 200px;
+			height: 200px;
+			border: 1px solid black;
+		}
+		#cuadro2{
+			
+			width: 200px;
+			height: 200px;
+			border: 1px solid black;
+		}
+		
+	</style>
+</head>
+<body>
+	<p id="texto">trabajando con id (id debe ser unico en todo el documento)</p> 
+	<p class="tex1" >trabajando con class, el class lo pueden tener varios elementos</p> 
+	<p class="otro">no afecta a este x q tiene otro class</p> 
+	<p class="tex1">afecta a este x q tiene el mismo class</p> 
+	<p title="atr">trabajando con atributos</p>
+	<h1> selector por etiquetas</h1>
+	<h1> afecta a todas las etiquets</h1>
+
+	<p id="rf">selector multiple</p>
+	<div class="ro">todo en conjungo</div>
+	<p id="jj">aqui tb afecta</p>
+	<span id="padre">
+		<p>selector jerarquico</p>
+		<p>aqui tb afecta desde el padre</p>
+	</span>
+	
+	<table id="table1">
+		<tr><td>2</td><td>1</td><td>2</td></tr>
+		<tr><td>2</td><td>1</td><td>2</td></tr>
+		<tr><td>2</td><td>1</td><td>2</td></tr>
+		<tr><td>2</td><td>1</td><td>2</td></tr>
+		<tr><td>2</td><td>1</td><td>2</td></tr>
+		<tr><td>2</td><td>1</td><td>2</td></tr>
+	</table>
+
+	<ul id="list1">
+		<li>li 1</li>
+		<li>li 2</li>
+		<li>li 3</li>
+		<li>li 4</li>
+	</ul>
+
+
+	<p>hola como esta</p>
+	<p> en mundo esta loco</p>
+	<p> es mejor andar solo como lobo</p>
+	<p id="parro1"> </p>
+	<p id="add">agregando y quitando clases css </p>
+
+	<table id="table2">
+		<tr><td>1</td><td>2</td><td></td></tr>
+		<tr><td></td><td>5</td><td>6</td></tr>
+		<tr><td>7</td><td></td><td></td></tr>
+	</table>
+
+	<p id="texdina1">texto dinamico1</p>
+	<p id="texdina2">texto dinamico2</p>
+	<p id="raton">probando el click del mouse</p>
+	<button id="but">click</button>
+	<select id="seleccion">
+		<option value="1">op 1</option>
+		<option value="2">op 2</option>
+		<option value="3">op 3</option>
+	</select>
+	<div id="cuadro"></div>
+	<p id="x"></p>
+	<p id="y"></p>
+	<div id="cuadro2"></div>
+	<button id="btn2">boton</button>
+
+
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){ 
+			//para hacer referencia a un id se utiliza el # (+texto), dice seleccionar el elemento que tiene el id texto. se utiliza el metodo css.
+			$('#texto').css("color","red");
+			//para hacer referencia a un class se utiliza el punto
+			//para optimizar la clase y no busque en todos los elementos la coincidencia de las clases, se especifica en que elementos se encuentra la clase para optimizar. ejemp p -> busca en los parrafos , va antes del punto
+			$('p.tex1').css("color","blue");
+			// selector por atributo, title=(se compara) -> "es lentooooo"
+			$('p[title=atr]').css("color","green");
+			// selector por etiquetas
+			$('h1').css("color","pink");
+			// selector multiple de elementos
+			$('#rf,.ro,#jj').css("color","blue")
+			//selectores jerarquicos
+			$('#padre p').css('color','red')
+			//selector de los hermanos sgtes
+			//////////////-----filtros->
+			$('#table1 tr:even').css('background','#9cf')
+			$('#table1 tr:eq(1)').css('background','red')
+			$('#table1 tr:gt(3)').css('background','green')// gt-> de la posicion para adelante 
+			$('#list1 li:not(:first,:last)').css('background','blue')
+			$('#list1 li:first-child').css('background','red')
+			//filtros por letra
+			$('p:contains(esta)').css('background','#9cf')
+			//filtros para vacios, solo pintara las celdas vacias
+			$('td:empty').css('background','#9cf')
+			
+			//------------ metodos*********************
+			
+			console.log($('#table1').html()); //getter
+			$('#parro1').html('este un texto introducido <b>setter</b>') //setter
+			$('#add').addClass('rojo'); // agregando y tb se puede quitar
+			$('#table2').append('<tr><td>before</td><td>222</td><td></td></tr><tr><td></td><td>5</td><td>6</td></tr><tr><td>7</td><td></td><td></td></tr>') //agrega html o texto
+			$('#table2').prepend('<tr><td>after</td><td>222</td><td></td></tr><tr><td></td><td>5</td><td>6</td></tr><tr><td>7</td><td></td><td></td></tr>') //agrega html al inicio
+			$('#table2').after('<table><tr><td>after</td><td>222</td><td></td></tr><tr><td></td><td>5</td><td>6</td></tr><tr><td>7</td><td></td><td></td></tr></table>') //agrega despues de todo el html.. texto o html before()hace lo opuesto
+			//alert($('#texdina1').text()); // solo maneja textos no html
+			$('#texdina1').text('este es el nuevo dinamico');
+			$('#texdina2').css({
+				"color":"red",
+				"font-size":"32px",
+				"border":"solid 2px black"
+			});
+			/////// eventos**********************
+			$('#but').click(function(){
+				$('#raton').css('color','red');
+			});
+			$('#seleccion').change(function(){
+				var value = $('#seleccion').val(); // se puede hacer un getter y setter
+				alert('select '+ value)
+			});
+			/*$('#cuadro').mouseover(function(){ // si acerca el raton cambia de color
+				$('#cuadro').css('background-color','blue');
+			});
+			$('#cuadro').mouseout(function(){ // se aleja cambia de color
+				$('#cuadro').css('background-color','red');
+			});*/
+			$('#cuadro').hover(function(){
+				$('#cuadro').css('background-color','blue');
+			},function(){
+				$('#cuadro').css('background-color','red');
+			});
+			$('#cuadro2').mousemove(function(event){
+				$('#x').text('coordenada X:' + event.clientX);
+				$('#y').text('coordenada Y:' + event.clientY);
+			});
+			$('#btn2').on('click',function(){
+				alert('utilizando on');
+			});
+
+
+
+		});
+
+	</script>
+</body>
+</html>

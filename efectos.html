@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Selectores test</title>
+	
+</head>
+<body>
+	<center>
+		<img id="i1" src="img/feliz.jpg" height="42" width="42">
+		<br>
+		<button id="btn">hidden</button>
+		<button id="btn2">show</button>
+	</center>
+	<center>
+		<img id="i2" src="img/feliz.jpg" height="42" width="42">
+		<br>
+		<button id="btn3">hidden</button>
+		<button id="btn4">show</button>
+	</center>
+	<center>
+		<img id="i3" src="img/feliz.jpg" height="42" width="42">
+		<br>
+		<button id="btn5">button</button>
+	</center>
+	<form id="formSuma">
+		<input type="text" name="num_a" id="numero1">
+		<input type="text" name="num_b" id="numero2">
+		<button type="button" id="enviar">enviar</button>
+	</form>
+	<br>
+	<dir id="resultado"></dir>
+	<script src="js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){ 
+			$('#btn').click(function(event){
+				$('#i1').hide(2000); // eq a 2 seg
+			});
+			$('#btn2').click(function(event){
+				$('#i1').show('fast'); // puede ir slow
+			});
+			$('#btn3').click(function(event){
+				$('#i2').fadeOut(2000,function(){
+					alert('ima hidden')
+				}); // puede ir slow
+			});
+			$('#btn4').click(function(event){
+				$('#i2').fadeIn(2000); // puede ir slow
+			});
+			$('#btn5').click(function(event){
+				$('#i3').toggle(2000); // puede ir slow
+			});
+		});
+		//////////// utilizando ajax
+		$('#enviar').click(function(event){
+			var numeros = $('#formSuma').serialize(); // de esta forma estamos tomando todos los valores del formulario, pero se tomar por medio de su name.
+			$.post('url',numeros,function(data){
+				$('#resultado').text(data);
+			});
+		});
+	</script>
+</body>
+</html>
