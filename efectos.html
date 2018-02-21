@@ -58,6 +58,18 @@
 				$('#resultado').text(data);
 			});
 		});
+		// paginas... preloaders.net...loading.io son paginas para poner figuras de cargando
+		//.ajax-> metodo mas completo de ajax
+		var datosmelas = $('#cal').serialize()
+		$.ajax({
+			url: 'aqui va la url',
+			type:'POST', // el tipo puede ser get o post
+			dataType:'json', // pueder xml,javascrip.. peor lo mas utilizado es json
+			data:datosmelas//{"id",id}//parametros de datos, que datos se van a enviar del formulario
+
+		}).done(function(data){
+			
+		});//el done, ayuda a recuperar informacion del servidor
 	</script>
 </body>
 </html>
